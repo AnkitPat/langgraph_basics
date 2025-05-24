@@ -18,8 +18,11 @@ def classify_message(state):
 
 def handle_math(state):
     result = math_tool.run(state["input"])
-    return {**state, "output": result}  
+    return {**state, "output": result, "route": "math_verifier"}  
 
 def handle_search(state):
     result = search_tool.run(state["input"])
     return {**state, "output": result} 
+
+def handle_math_verifier(state):
+    return {**state, "verified_output": f"Verified result: {state["output"]}"}
